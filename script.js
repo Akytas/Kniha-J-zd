@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Zobrazení seznamu vozidel v kartách
-    function displayVehicles() {
+        function displayVehicles() {
         const vehicles = JSON.parse(localStorage.getItem("vehicles")) || [];
         vehiclesContainer.innerHTML = "";
     
@@ -139,48 +139,69 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Vytvoření tabulky s jízdami
     function createTripsTable(trips = []) {
-        if (!trips.length) return "<em>Žádné jízdy</em>";
+            if (!trips.length) return "<em>Žádné jízdy</em>";
+        
+            trips.sort((a, b) => new Date(a.date) - new Date(b.date));
+        
+            return `
+                <button onclick="printTripsTable()">Tisk</button>
+                <table id="tripsTable">
+                    <thead>
+                        <tr>
+                            <th>Datum</th>
+                            <th>Místo odjezdu</th>
+                            <th>Místo příjezdu</th>
+                            <th>Účel</th>
+                            <th>Počáteční tachometr</th>
+                            <th>Konečný tachometr</th>
+                            <th>Ujeto km</th>
+                            <th>Řidič</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${trips.map(trip => {
+                            const dateObj = new Date(trip.date);
+                            const formattedDate = `${dateObj.getDate().toString().padStart(2, '0')}.
+                                                   ${(dateObj.getMonth() + 1).toString().padStart(2, '0')}.
+                                                   ${dateObj.getFullYear()}`;
+                            const ujetoKm = trip.finalOdometer - trip.initialOdometer;
+                            return `
+                                <tr>
+                                    <td>${formattedDate}</td>
+                                    <td>${trip.departure}</td>
+                                    <td>${trip.arrival}</td>
+                                    <td>${trip.purpose}</td>
+                                    <td>${trip.initialOdometer} km</td>
+                                    <td>${trip.finalOdometer} km</td>
+                                    <td>${ujetoKm} km</td>
+                                    <td>${trip.name}</td>
+                                </tr>
+                            `;
+                        }).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
     
-        trips.sort((a, b) => new Date(a.date) - new Date(b.date));
-    
-        return `
-            <table>
-                <thead>
-                    <tr>
-                        <th>Datum</th>
-                        <th>Místo odjezdu</th>
-                        <th>Místo příjezdu</th>
-                        <th>Účel</th>
-                        <th>Počáteční tachometr</th>
-                        <th>Konečný tachometr</th>
-                        <th>Ujeto km</th>
-                        <th>Řidič</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${trips.map(trip => {
-                        const dateObj = new Date(trip.date);
-                        const formattedDate = `${dateObj.getDate().toString().padStart(2, '0')}.
-                                               ${(dateObj.getMonth() + 1).toString().padStart(2, '0')}.
-                                               ${dateObj.getFullYear()}`;
-                        const ujetoKm = trip.finalOdometer - trip.initialOdometer;
-                        return `
-                            <tr>
-                                <td>${formattedDate}</td>
-                                <td>${trip.departure}</td>
-                                <td>${trip.arrival}</td>
-                                <td>${trip.purpose}</td>
-                                <td>${trip.initialOdometer} km</td>
-                                <td>${trip.finalOdometer} km</td>
-                                <td>${ujetoKm} km</td>
-                                <td>${trip.name}</td>
-                            </tr>
-                        `;
-                    }).join('')}
-                </tbody>
-            </table>
-        `;
+        window.printTripsTable = printTripsTable;
+
+   //tisk//
+   function printTripsTable() {
+    const tripsTable = document.getElementById("tripsTable");
+    if (!tripsTable) {
+        alert("Tabulka jízd nebyla nalezena.");
+        return;
     }
+
+    const printWindow = window.open('', '', 'height=600,width=800');
+    printWindow.document.write('<html><head><title>Tisk tabulky jízd</title>');
+    printWindow.document.write('<style>table { width: 100%; border-collapse: collapse; } th, td { padding: 10px; border: 1px solid #ddd; text-align: left; } th { background-color: #4CAF50; color: white; }</style>');
+    printWindow.document.write('</head><body>');
+    printWindow.document.write(tripsTable.outerHTML);
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.print();
+}
 
     // Přidání nové jízdy
     window.addTrip = function(index) {
@@ -288,7 +309,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (vehicle.refuels && vehicle.refuels.length > 0) {
             refuelsContainer.innerHTML = `
                 <h3>Seznam dotankování</h3>
-                <table>
+                <button onclick="printRefuelsTable(${index})">Tisk</button>
+                <table id="refuelsTable-${index}">
                     <thead>
                         <tr>
                             <th>Datum</th>
@@ -327,6 +349,24 @@ document.addEventListener("DOMContentLoaded", () => {
             vehicleCard.removeChild(existingRefuelsContainer);
         }
         vehicleCard.appendChild(refuelsContainer);
+    }
+    
+    // Funkce pro tisk tabulky dotankování
+    window.printRefuelsTable = function(index) {
+        const refuelsTable = document.getElementById(`refuelsTable-${index}`);
+        if (!refuelsTable) {
+            alert("Tabulka dotankování nebyla nalezena.");
+            return;
+        }
+    
+        const printWindow = window.open('', '', 'height=600,width=800');
+        printWindow.document.write('<html><head><title>Tisk tabulky dotankování</title>');
+        printWindow.document.write('<style>table { width: 100%; border-collapse: collapse; } th, td { padding: 10px; border: 1px solid #ddd; text-align: left; } th { background-color: #4CAF50; color: white; }</style>');
+        printWindow.document.write('</head><body>');
+        printWindow.document.write(refuelsTable.outerHTML);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
     }
 
     // Servis//

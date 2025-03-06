@@ -104,7 +104,7 @@ button:hover {
 }
 
 .vehicle-card th {
-    background-color: #7468da; /* Zelené pozadí */
+    background-color: rgb(123, 124, 115); /* Zelené pozadí */
     color: white; /* Bílý text */
     font-weight: bold; /* Tučný text */
     text-align: center; /* Zarovnání textu na střed */
@@ -167,3 +167,113 @@ footer {
     text-align: center;
     line-height: 50px;
   }
+  /* ...existing code... */
+
+/* Media Queries pro menší displeje */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .logo {
+        max-width: 50%;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    table, th, td {
+        font-size: 14px;
+    }
+
+    input[type="text"], input[type="number"], input[type="date"], input[type="name"] {
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    .vehicle-card {
+        padding: 10px;
+    }
+
+    .vehicle-card h3 {
+        font-size: 20px;
+    }
+
+    .vehicle-card p {
+        font-size: 12px;
+    }
+
+    .vehicle-card button {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .vehicle-card .trips-table-container {
+        max-height: 200px;
+    }
+
+    footer {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        max-width: 70%;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    table, th, td {
+        font-size: 12px;
+    }
+
+    input[type="text"], input[type="number"], input[type="date"], input[type="name"] {
+        font-size: 12px;
+    }
+
+    button {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .vehicle-card {
+        padding: 8px;
+    }
+
+    .vehicle-card h3 {
+        font-size: 18px;
+    }
+
+    .vehicle-card p {
+        font-size: 10px;
+    }
+
+    .vehicle-card button {
+        font-size: 10px;
+        padding: 6px;
+    }
+
+    .vehicle-card .trips-table-container {
+        max-height: 150px;
+    }
+
+    footer {
+        font-size: 10px;
+    }
+}
