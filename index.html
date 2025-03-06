@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Správa vozidel </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Správa vozidel JSDH Horoměřice</h1>
+    <!-- logo -->
+    <div class="logo-container">
+        <img src="obrazky/znak22.png" alt="Logo" class="logo">
+    </div>
+
+    <!-- Přihlášení -->
+    <div id="loginForm">
+        <input type="password" id="password" placeholder="Zadejte heslo">
+        <button id="loginButton">Přihlásit se</button>
+    </div>
+    <button id="logoutButton" style="display: none;">Odhlásit se</button>
+    
+    <!-- Formulář pro přidání vozidla (S možností sbalení) -->
+    <h2 onclick="toggleVisibility('formVozidlo')" style="cursor: pointer;">
+        Přidat nové vozidlo <span id="toggleIcon">▼</span>
+    </h2>
+    <div id="formVozidlo" style="display: none;">
+        <input type="text" id="nazevVozidla" placeholder="Název vozidla">
+        <input type="number" id="pocatecniTachometr" placeholder="Počáteční tachometr">
+        <button id="pridatVozidlo">Přidat vozidlo</button>
+    </div>
+    
+    <!-- Tabulka pro vozidla -->
+    <table id="seznamVozidel" style="display: none;">
+        <tbody></tbody>
+    </table>
+    <div id="vehiclesContainer" style="display: none;">
+        <!-- Karty vozidel budou přidány zde -->
+    </div>
+
+    <!-- Formuláře pro další akce -->
+    <div id="formularJizdy" style="display: none;">
+        <h2>Zadání nové jízdy</h2>
+        <input type="text" id="mistoOdjezdu" placeholder="Místo odjezdu">
+        <input type="text" id="mistoPrijezdu" placeholder="Místo příjezdu">
+        <input type="text" id="ucelJizdy" placeholder="Účel jízdy">
+        <input type="number" id="konecnyTachometr" placeholder="Konečný tachometr">
+        <input type="text" id="jizduProvedl" placeholder="Jízdu provedl">
+        <input type="date" id="datumJizdy">
+        <button id="vlozitJizdu">Vložit jízdu</button>
+    </div>
+
+    <div id="formularDotankovani" style="display: none;">
+        <h2>Dotankování vozidla</h2>
+        <input type="number" id="stavKilometruDotankovani" placeholder="Stav kilometru po dotankování">
+        <input type="number" id="litry" placeholder="Počet litrů">
+        <input type="number" id="castka" placeholder="Cena">
+        <input type="text" id="kdoDotankoval" placeholder="Kdo dotankoval">
+        <button id="ulozitDotankovani">Vložit dotankování</button>
+    </div>
+    
+    <div id="formularSTK" style="display: none;">
+        <h2>Zadání STK</h2>
+        <input type="date" id="datumSTK" placeholder="Datum STK">
+        <button id="ulozitSTK">Uložit STK</button>
+    </div>
+    <!-- Formulář pro servis -->
+    <div id="formularServis" style="display: none;">
+        <h2>Zadání servisu</h2>
+        <input type="date" id="datumServisu" placeholder="Datum servisu">
+        <input type="text" id="popisServisu" placeholder="Popis servisu">
+        <button id="ulozitServis">Uložit servis</button>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+<footer>
+    <p class="copyright">&copy; 2024 Hasiči Horoměřice. Všechna práva vyhrazena.</p>
+</footer>
+</html>
