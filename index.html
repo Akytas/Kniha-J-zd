@@ -22,6 +22,7 @@
     <button id="logoutButton" style="display: none;">Odhlásit se</button>
     
     <!-- Formulář pro přidání vozidla (S možností sbalení) -->
+<div id="addVehicleSection" style="display: none;">
     <h2 onclick="toggleVisibility('formVozidlo')" style="cursor: pointer;">
         Přidat nové vozidlo <span id="toggleIcon">▼</span>
     </h2>
@@ -30,6 +31,7 @@
         <input type="number" id="pocatecniTachometr" placeholder="Počáteční tachometr">
         <button id="pridatVozidlo">Přidat vozidlo</button>
     </div>
+</div>
     
     <!-- Tabulka pro vozidla -->
     <table id="seznamVozidel" style="display: none;">
@@ -40,7 +42,7 @@
     </div>
 
     <!-- Formuláře pro další akce -->
-    <div id="formularJizdy" style="display: none;">
+    <div id="formularJizdy" class="floating-form" style="display: none;">
         <h2>Zadání nové jízdy</h2>
         <input type="text" id="mistoOdjezdu" placeholder="Místo odjezdu">
         <input type="text" id="mistoPrijezdu" placeholder="Místo příjezdu">
@@ -50,8 +52,8 @@
         <input type="date" id="datumJizdy">
         <button id="vlozitJizdu">Vložit jízdu</button>
     </div>
-
-    <div id="formularDotankovani" style="display: none;">
+    
+    <div id="formularDotankovani" class="floating-form" style="display: none;">
         <h2>Dotankování vozidla</h2>
         <input type="number" id="stavKilometruDotankovani" placeholder="Stav kilometru po dotankování">
         <input type="number" id="litry" placeholder="Počet litrů">
@@ -60,10 +62,17 @@
         <button id="ulozitDotankovani">Vložit dotankování</button>
     </div>
     
-    <div id="formularSTK" style="display: none;">
+    <div id="formularSTK" class="floating-form" style="display: none;">
         <h2>Zadání STK</h2>
         <input type="date" id="datumSTK" placeholder="Datum STK">
         <button id="ulozitSTK">Uložit STK</button>
+    </div>
+    
+    <div id="formularServis" class="floating-form" style="display: none;">
+        <h2>Zadání servisu</h2>
+        <input type="date" id="datumServisu" placeholder="Datum servisu">
+        <input type="text" id="popisServisu" placeholder="Popis servisu">
+        <button id="ulozitServis">Uložit servis</button>
     </div>
     <!-- Formulář pro servis -->
     <div id="formularServis" style="display: none;">

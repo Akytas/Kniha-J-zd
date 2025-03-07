@@ -31,6 +31,8 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    overflow-x: auto; /* Přidáno pro horizontální posouvání */
+    display: block; /* Přidáno pro horizontální posouvání */
 }
 
 th, td {
@@ -134,16 +136,21 @@ button:hover {
     overflow-y: auto; /* Přidá scrollování, pokud tabulka přesahuje výšku */
 }
 
+/* Styl pro kontejner tlačítka pro odstranění vozidla */
 .vehicle-card-header {
     position: absolute;
     top: 10px;
     right: 10px;
+    background-color: transparent; /* Transparentní pozadí */
+    padding: 0; /* Žádné vnitřní odsazení */
+    margin: 0; /* Žádné vnější odsazení */
 }
 
+/* Styl pro tlačítko pro odstranění vozidla */
 .delete-vehicle-button {
     background-color: #ff4c4c;
     color: white;
-    border: 1px solid black; /* Přidán černý rámeček */
+    border: 1px solid black; /* Černý rámeček */
     padding: 5px 10px;
     cursor: pointer;
     font-size: 14px;
@@ -155,19 +162,66 @@ button:hover {
 
 .delete-vehicle-button .icon {
     margin-right: 5px;
-    color: yellow; /* Nastavení barvy ikony na žlutou */
+    color: yellow; /* Barva ikony na žlutou */
 }
 
 .delete-vehicle-button:hover {
     background-color: #ff1a1a;
 }
+
+/* Media Queries pro menší displeje */
+@media (max-width: 768px) {
+    .vehicle-card-header {
+        top: 5px;
+        right: 5px;
+    }
+
+    .delete-vehicle-button {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .vehicle-card-header {
+        top: 3px;
+        right: 3px;
+    }
+
+    .delete-vehicle-button {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+}
+
+
 footer {
     height: 50px;
     background-color: #ddd;
     text-align: center;
     line-height: 50px;
   }
-  /* ...existing code... */
+  .floating-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.floating-form h2 {
+    margin-top: 0;
+}
+
+.floating-form button {
+    width: 100%;
+}
 
 /* Media Queries pro menší displeje */
 @media (max-width: 768px) {
